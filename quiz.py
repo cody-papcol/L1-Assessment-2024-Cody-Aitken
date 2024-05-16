@@ -1,7 +1,5 @@
 import random
 
-# test edit
-
 # initialise variables
 operation = ''
 correct = 0
