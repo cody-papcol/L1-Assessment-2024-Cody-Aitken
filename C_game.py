@@ -52,16 +52,11 @@ for n in range(num_of_questions):
         answer_list.append(int(answer))
         correct_list.append(int(correct_answer))
     if operation == '/':
-        num1 = random.randint(15, 50)
-        num2 = random.randint(0, 15)
-        correct_answer = num1 / num2
-
-        while not float(correct_answer).is_integer():
-            num1 = random.randint(0, 100)
-            num2 = random.randint(0, 15)
-            print('Searching for a suitable division question...')
-
-        question = str(num1) + ' / ' + str(num2) + ' = '
+        num1 = random.randint(2, 15)
+        num2 = random.randint(1, 15)
+        result = num1 * num2
+        correct_answer = result / num1
+        question = str(result) + ' / ' + str(num1) + ' = '
         answer = input(question)
         if int(answer) == correct_answer:
             print('Good job, the answer was correct.')
