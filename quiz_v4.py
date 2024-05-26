@@ -59,7 +59,6 @@ def diff_checker(diff_question):
 
 # initialise variables
 correct = 0
-incorrect = 0
 need_instructions = ''
 difficulty = 'normal'
 num1 = 0
@@ -70,6 +69,7 @@ question = ''
 questions_list = []
 correct_list = []
 answer_list = []
+summary_yn = ''
 play_again = ''
 
 # welcome message
@@ -106,6 +106,7 @@ answer to that question. Your total score as a percentage will also show.
 
 ''')
 
+# loops while the 'play again' variable is not 'n', the variable is set to y or n at the end of the loop
 while play_again != 'n':
     # gets the difficulty that the user wants
     print()
@@ -128,7 +129,7 @@ while play_again != 'n':
     for n in range(num_of_questions):
         print('Question ' + str(n + 1))
 
-        # addition questions
+        # addition questions, harder depending on chosen difficulty
         if operation == '+':
             if difficulty == 'easy':
                 num1 = random.randint(0, 10)
@@ -160,7 +161,7 @@ while play_again != 'n':
             correct_list.append(int(correct_answer))
             questions_list.append(question)
 
-        # subtraction questions
+        # subtraction questions, harder depending on chosen difficulty
         if operation == '-':
             if difficulty == 'easy':
                 num2 = random.randint(0, 10)
@@ -192,7 +193,7 @@ while play_again != 'n':
             correct_list.append(int(correct_answer))
             questions_list.append(question)
 
-        # multiplication questions
+        # multiplication questions, harder depending on chosen difficulty
         if operation == '*':
             if difficulty == 'easy':
                 num1 = random.randint(1, 6)
@@ -224,7 +225,7 @@ while play_again != 'n':
             correct_list.append(int(correct_answer))
             questions_list.append(question)
 
-        # division questions
+        # division questions, harder depending on chosen difficulty
         if operation == '/':
             if difficulty == 'easy':
                 num1 = random.randint(2, 5)
@@ -259,30 +260,35 @@ while play_again != 'n':
             correct_list.append(int(correct_answer))
             questions_list.append(question)
 
-    # summary blocks
-    print()
-    print('Summary:')
-    print()
-    num = 1
+    # asks user if they want their statistics
+    user_summary = yes_no('Would you likes stats on your game performance? (y/n): ')
+    if user_summary == 'y':
+        # summary blocks
+        print()
+        print('Summary:')
+        print()
+        num = 1
 
-    # showing each question and answer and if they were correct or not
-    for ans in answer_list:
-        if correct_list[num - 1] == ans:
-            print('Question', str(num) + ':', 'The question was', '\'' + str(questions_list[-1]) + '\'' +
-                  '. The correct answer was', str(correct_list[num - 1]) + '. Your answer was', str(ans) + '.' + ' ✅')
-            print()
-        else:
-            print('Question', str(num) + ':', 'The question was', '\'' + str(questions_list[-1]) + '\'' +
-                  '. The correct answer was', str(correct_list[num - 1]) + '. Your answer was', str(ans) + '.' + ' ❌')
-            print()
-        num += 1
+        # showing each question and answer and if they were correct or not
+        for ans in answer_list:
+            if correct_list[num - 1] == ans:
+                print('Question', str(num) + ':', 'The question was', '\'' + str(questions_list[-1]) + '\'' +
+                      '. The correct answer was', str(correct_list[num - 1]) + '. Your answer was',
+                      str(ans) + '.' + ' ✅')
+                print()
+            else:
+                print('Question', str(num) + ':', 'The question was', '\'' + str(questions_list[-1]) + '\'' +
+                      '. The correct answer was', str(correct_list[num - 1]) + '. Your answer was',
+                      str(ans) + '.' + ' ❌')
+                print()
+            num += 1
 
-    # displays score percentage
-    final_score = correct / num_of_questions
-    final_score = final_score * 100
-    print()
-    print('Your final score as a percentage is', str(final_score) + '%')
-    print()
+        # displays score percentage
+        final_score = correct / num_of_questions
+        final_score = final_score * 100
+        print()
+        print('Your final score as a percentage is', str(final_score) + '%')
+        print()
 
     # asks user if they want to play again
     play_again = yes_no('Would you like to play again? (y/n): ')
